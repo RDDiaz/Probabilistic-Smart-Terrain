@@ -27,7 +27,8 @@ PstAI script:
 
 This script determines the method of the AI movement within the waypoint grid system; movement options that utilize the grid system include “Random”, “Manual”, “PstPatrol” and “Pst”. This script is also responsible for assigning player need levels which are used in the setRoute() function to determine the values associated with each waypoint.  Lastly, the script is also responsible for handling collision events between the AI and waypoints. These collisions are the method utilized in the package to simulate the AI collecting an object that satisfies one of its current needs. The script is designed to allow a user to set movement behaviors and values associated with them in the inspector.
 
-(Pictured: Inspector view of game object with PstAI script attached)
+(Pictured: Inspector view of game object with PstAI script attached) 
+
 ![smartterrain4](https://user-images.githubusercontent.com/28874711/32076327-935ee0f8-ba6d-11e7-8a2b-4d85c9c66bc0.png)
 
 
@@ -35,7 +36,8 @@ SmartWaypoint script:
 
 The smartWaypoint script contains information regarding the individual waypoints that make up the grid.  This information includes what needs can presently be satisfied at the individual waypoint, the probability that the waypoint will be able to satisfy a given need in the future, as well as the rate of degradation for needs at that waypoint location.  During update() this script calculates and applies degradation to objects at its location according to the rate of degradation set by the user in the inspector.  Lastly, this script is responsible for “removing” a need (setting its existence value to false for that waypoint) when an AI collides with it.  The script is designed to allow the user to set all the initial values of the waypoint in the inspector.
 
-(Pictured: Inspector view of game objet with SmartWaypoint script attached)
+(Pictured: Inspector view of game object with SmartWaypoint script attached)
+
 ![smartterrain6](https://user-images.githubusercontent.com/28874711/32076335-9941a0c8-ba6d-11e7-9b86-c943ca78c030.png)
 
 WaypointGrid script:
@@ -43,6 +45,7 @@ WaypointGrid script:
 The WaypointGrid is responsible for calculating the movement of an AI that has the PstAI script attached and that has the “Pst” movement option selected.  The script allows users to drag and drop waypoint objects in the inspector to create an array of transforms which are then stored in a 2d array called “Grid”.  The Grid represents a 2d tile view of the map.  The primary method of the class is CalculateRoute() which is called by the pstAI script attached to an AI character in the Unity environment.  When called the CalculateRoute() function first iterates through the Grid and checks the waypoints at the associated index locations for whether they contain resources that can satisfy a character’s needs.  This creates a map of 0’s and 1’s representing where character objectives are located and is done for each need.  The values in the objective array are then used to calculate the values of each “tile” on the 2d Grid by multiplying the characters need for an objective by the magnitude between the objective and the character and storing that information in a strength array for the need in question. The individual strength arrays are then combined into a single strength array representing the highest possible values for each tile. Lastly, a series of checks on the resulting strength array is used to determine the highest available tile to move to. The resulting values are then used to set a Vector3 which is returned to the character object and assigned as its destination. The script allows the user to set and create a waypointGrid of any size in the inspector so long as the resulting Grids length is equal to its height. The script also allows for the user to set whether needs will change (degrade and ultimately disappear) overtime.
 
 (Pictured: Inspector view of game object with WaypointGrid script attached) 
+
 ![smartterrain5](https://user-images.githubusercontent.com/28874711/32076332-96cdd1fe-ba6d-11e7-846f-7ee256d67241.png)
 
 
